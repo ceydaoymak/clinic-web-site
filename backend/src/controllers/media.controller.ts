@@ -9,10 +9,12 @@ export const uploadMedia = async (req: AuthRequest, res: Response) => {
     }
 
     const media = await createMedia(
-      req.file.filename,
+      req.file.filename, // This is the public_id in Cloudinary storage
       req.file.originalname,
       req.file.mimetype,
-      req.file.size
+      req.file.size,
+      req.file.path, // This is the secure_url
+      req.file.filename // We use filename/public_id as path reference
     );
 
     res.status(201).json(media);

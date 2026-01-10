@@ -4,17 +4,19 @@ import path from 'path';
 import { config } from '../config/env';
 
 export const createMedia = async (
-  filename: string,
+  filename: string, // In Cloudinary this is the public_id
   originalName: string,
   mimeType: string,
-  size: number
+  size: number,
+  url: string,
+  filePath: string
 ): Promise<Media> => {
-  const url = `/uploads/${filename}`;
-  const filePath = path.join(config.uploadDir, filename);
+  // filePath in Cloudinary context is usually just the public_id or similar, 
+  // but we store it to be compatible with the deletes later if needed (using API)
 
   return prisma.media.create({
     data: {
-      filename,
+      filename, // public_id
       originalName,
       mimeType,
       size,
@@ -33,13 +35,13 @@ export const getAllMedia = async (): Promise<Media[]> => {
 export const deleteMedia = async (id: string): Promise<void> => {
   const media = await prisma.media.findUnique({ where: { id } });
   if (media) {
-    const fs = require('fs');
     try {
-      if (fs.existsSync(media.path)) {
-        fs.unlinkSync(media.path);
-      }
+      // Import dynamically to avoid top-level dependency issues if config not loaded
+      const { cloudinary } = await import('../config/cloudinary.config');
+      // media.filename holds the public_id provided by Cloudinary
+      await cloudinary.uploader.destroy(media.filename);
     } catch (error) {
-      console.error('Error deleting file:', error);
+      console.error('Error deleting file from Cloudinary:', error);
     }
   }
   await prisma.media.delete({ where: { id } });

@@ -4,14 +4,14 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import api from '../../config/api';
-import { uploadImageAndGetUrl } from '../../services/firebaseImage';
-import { 
-  ArrowLeft, 
-  Save, 
-  Upload, 
-  Image as ImageIcon, 
-  X, 
-  Eye, 
+import { uploadMedia } from '../../services/media.service';
+import {
+  ArrowLeft,
+  Save,
+  Upload,
+  Image as ImageIcon,
+  X,
+  Eye,
   CheckCircle,
   Loader2
 } from 'lucide-react';
@@ -60,8 +60,8 @@ const AdminBlogEdit = () => {
     if (!file) return;
     try {
       setSaving(true);
-      // Firebase Storage'a yükle
-      const url = await uploadImageAndGetUrl(file);
+      // Backend üzerinden Cloudinary'ye yükle
+      const url = await uploadMedia(file);
       setCoverImage(url);
     } catch (error) {
       alert('Görsel yüklenemedi.');
@@ -124,7 +124,7 @@ const AdminBlogEdit = () => {
                 {isNew ? 'YENİ YAZI' : 'YAZI DÜZENLE'}
               </h1>
             </div>
-            
+
             <div className="flex items-center gap-3">
               <button
                 onClick={() => handleSave(false)}
@@ -149,7 +149,7 @@ const AdminBlogEdit = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Sol Kolon: Ana İçerik */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
@@ -201,7 +201,7 @@ const AdminBlogEdit = () => {
 
           {/* Sağ Kolon: Ayarlar & Görsel */}
           <div className="space-y-6">
-            
+
             {/* Yayınlama Durumu Kartı */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
               <h3 className="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
@@ -235,7 +235,7 @@ const AdminBlogEdit = () => {
                 <ImageIcon size={18} className="text-indigo-500" />
                 Kapak Görseli
               </h3>
-              
+
               <div className="relative group">
                 {coverImage ? (
                   <div className="relative rounded-xl overflow-hidden border border-slate-200">
@@ -245,13 +245,13 @@ const AdminBlogEdit = () => {
                       className="w-full h-48 object-cover transition-transform group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                      <button 
+                      <button
                         onClick={() => fileInputRef.current?.click()}
                         className="p-2 bg-white rounded-full text-slate-900 hover:bg-indigo-50 transition-colors"
                       >
                         <Upload size={18} />
                       </button>
-                      <button 
+                      <button
                         onClick={() => setCoverImage('')}
                         className="p-2 bg-white rounded-full text-red-600 hover:bg-red-50 transition-colors"
                       >
