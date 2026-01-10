@@ -34,61 +34,58 @@ const Layout = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900">
-      
+
       {/* --- NAVBAR --- */}
-      <header 
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          scrolled 
-            ? 'bg-white/80 backdrop-blur-lg shadow-lg py-3' 
-            : 'bg-transparent py-5'
-        }`}
+      <header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
+          ? 'bg-white/80 backdrop-blur-lg shadow-lg py-3'
+          : 'bg-transparent py-5'
+          }`}
       >
         <nav className="container-custom">
           <div className="flex items-center justify-between">
             {/* Logo Area */}
             <Link to="/" className="flex items-center gap-3 group">
               <div className="relative">
-                <img 
-                  src="/img/foto.jpeg" 
-                  alt="Op. Dr. Bülent Azman" 
-                  className="h-12 w-12 rounded-full object-cover border-2 border-indigo-600 group-hover:scale-105 transition-transform" 
+                <img
+                  src="/img/foto.jpeg"
+                  alt="Op. Dr. Bülent Azman"
+                  className="h-12 w-12 rounded-full object-cover border-2 border-indigo-600 group-hover:scale-105 transition-transform"
                 />
               </div>
               <div className="flex flex-col">
                 <span className={`text-lg font-bold leading-none transition-colors ${scrolled || location.pathname !== '/' ? 'text-slate-900' : 'text-white md:text-white'}`}>
                   Op. Dr. Bülent Azman
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-indigo-500">
+                <span className="text-[10px] md:text-[10px] sm:text-[9px] uppercase tracking-[0.2em] font-bold text-indigo-500">
                   Çocuk Cerrahisi Uzmanı
                 </span>
               </div>
             </Link>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                    isActive(link.path)
-                      ? 'bg-indigo-600 text-white'
-                      : scrolled || location.pathname !== '/' 
-                        ? 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50' 
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${isActive(link.path)
+                    ? 'bg-indigo-600 text-white'
+                    : scrolled || location.pathname !== '/'
+                      ? 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                    }`}
                 >
                   {link.label}
                 </Link>
               ))}
-          
+
             </div>
 
             {/* Mobile Toggle */}
             <button
-              className={`md:hidden p-2 rounded-lg transition-colors ${
-                scrolled || location.pathname !== '/' ? 'text-slate-900' : 'text-white'
-              }`}
+              className={`md:hidden p-2 rounded-lg transition-colors ${scrolled || location.pathname !== '/' ? 'text-slate-900' : 'text-white'
+                }`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -110,17 +107,15 @@ const Layout = () => {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`text-xl font-bold py-2 ${
-                      isActive(link.path) ? 'text-indigo-600' : 'text-slate-500'
-                    }`}
+                    className={`text-lg font-bold py-3 border-b border-slate-50 last:border-0 ${isActive(link.path) ? 'text-indigo-600 pl-2' : 'text-slate-600'
+                      } transition-all duration-200`}
                   >
                     {link.label}
                   </Link>
                 ))}
-                <hr className="border-slate-100" />
-                <div className="flex gap-4 pt-2">
-                   <a href="tel:05326653309" className="p-3 bg-indigo-50 text-indigo-600 rounded-full"><Phone size={20} /></a>
-                   <a href="https://instagram.com/opdrbulentazman" className="p-3 bg-indigo-50 text-indigo-600 rounded-full"><Instagram size={20} /></a>
+                <div className="flex gap-4 pt-4 justify-center">
+                  <a href="tel:05326653309" className="p-3 bg-indigo-50 text-indigo-600 rounded-full"><Phone size={20} /></a>
+                  <a href="https://instagram.com/opdrbulentazman" className="p-3 bg-indigo-50 text-indigo-600 rounded-full"><Instagram size={20} /></a>
                 </div>
               </div>
             </motion.div>
@@ -136,8 +131,8 @@ const Layout = () => {
       {/* --- FOOTER --- */}
       <footer className="bg-slate-900 text-slate-300 pt-20 pb-10">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12">
+
             {/* Brand Section */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">

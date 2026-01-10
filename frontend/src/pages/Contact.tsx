@@ -38,16 +38,16 @@ const Contact = () => {
 
   return (
     <div className="bg-white min-h-screen text-slate-900">
-      
+
       {/* --- MODERN HERO SECTION --- */}
-      <section className="pt-32 pb-16 bg-stone-50 border-b border-stone-100">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-stone-50 border-b border-stone-100">
         <div className="container-custom text-center md:text-left">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="max-w-3xl"
           >
-            <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6 italic text-slate-900">
+            <h1 className="text-4xl md:text-7xl font-light tracking-tight mb-4 md:mb-6 italic text-slate-900">
               İletişim <span className="font-semibold not-italic text-indigo-600">& Randevu</span>
             </h1>
             <p className="text-xl text-slate-500 leading-relaxed max-w-2xl">
@@ -60,15 +60,15 @@ const Contact = () => {
       <section className="py-24">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            
+
             {/* --- İLETİŞİM BİLGİLERİ (LEFT) --- */}
-            <motion.div 
+            <motion.div
               {...fadeInUp}
               className="lg:col-span-5 space-y-12"
             >
               <div>
                 <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600 mb-8">Klinik Bilgileri</h2>
-                
+
                 <div className="space-y-10">
                   <div className="flex gap-6 group">
                     <div className="w-12 h-12 shrink-0 bg-stone-50 flex items-center justify-center rounded-full group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
@@ -128,7 +128,7 @@ const Contact = () => {
             </motion.div>
 
             {/* --- FORM AREA (RIGHT) --- */}
-            <motion.div 
+            <motion.div
               {...fadeInUp}
               transition={{ delay: 0.2 }}
               className="lg:col-span-7 bg-white p-8 md:p-12 rounded-[2rem] border border-stone-100 shadow-xl"
@@ -140,7 +140,7 @@ const Contact = () => {
 
               <AnimatePresence mode="wait">
                 {submitted ? (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
@@ -206,8 +206,8 @@ const Contact = () => {
                       />
                     </div>
 
-                    <button 
-                      type="submit" 
+                    <button
+                      type="submit"
                       className="group flex items-center justify-center gap-3 w-full py-5 bg-slate-900 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
                     >
                       <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

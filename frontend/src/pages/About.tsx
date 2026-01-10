@@ -59,10 +59,10 @@ const About = () => {
               <span>/</span>
               <span className="text-slate-900 font-medium">Hakkımda</span>
             </nav>
-            <h3 className="text-5xl md:text-7xl font-light tracking-tight mb-6">
+            <h3 className="text-4xl md:text-7xl font-light tracking-tight mb-4 md:mb-6">
               Op. Dr. <span className="font-semibold text-indigo-600">Bülent Azman</span>
             </h3>
-            <h5 className='text-4xl italic'>Biyografi</h5>
+            <h5 className='text-3xl md:text-4xl italic'>Biyografi</h5>
 
           </motion.div>
         </div>
@@ -70,9 +70,9 @@ const About = () => {
 
       {/* --- BIOGRAPHY & STORY --- */}
       <section className="py-24">
-        <div className="container-custom grid grid-cols-2">
-          <div className="grid md:grid-cols-2 gap-12 items-center justify-between">
-            <motion.div {...fadeInUp} className="md:col-span-7">
+        <div className="container-custom grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="col-span-1 lg:col-span-7 space-y-8">
+            <motion.div {...fadeInUp}>
               <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
                 <span className="w-8 h-px bg-indigo-600"></span>
                 Profesyonel Yolculuğum
@@ -91,7 +91,7 @@ const About = () => {
               </div>
             </motion.div>
           </div>
-          <div>
+          <div className="col-span-1 lg:col-span-5">
             <section className="py-24 bg-white">
               <div className="container-custom">
                 <div className="grid md:grid-rows-2 gap-8">

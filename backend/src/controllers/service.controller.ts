@@ -38,8 +38,8 @@ export const createServiceController = async (req: AuthRequest, res: Response) =
   try {
     const { title, description, content, icon, image, order } = req.body;
 
-    if (!title || !description || !content) {
-      return res.status(400).json({ error: 'Title, description, and content are required' });
+    if (!title) {
+      return res.status(400).json({ error: 'Title is required' });
     }
 
     if (!req.userId) {
@@ -48,7 +48,7 @@ export const createServiceController = async (req: AuthRequest, res: Response) =
 
     const slug = createSlug(title);
     const existing = await getServiceBySlug(slug);
-    
+
     if (existing) {
       return res.status(400).json({ error: 'A service with this title already exists' });
     }
@@ -56,8 +56,8 @@ export const createServiceController = async (req: AuthRequest, res: Response) =
     const service = await createService({
       title,
       slug,
-      description,
-      content,
+      description: description || "",
+      content: content || "",
       icon,
       image,
       order: order || 0,

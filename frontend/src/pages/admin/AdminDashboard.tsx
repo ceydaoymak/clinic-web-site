@@ -172,7 +172,6 @@ const AdminDashboard = () => {
             {[
               { title: 'Blog Yönetimi', path: '/admin/blog', icon: <FileText size={20} />, desc: 'Yazıları düzenle ve ekle' },
               { title: 'Hizmetler', path: '/admin/hizmetler', icon: <Settings size={20} />, desc: 'Verilen hizmetleri yönet' },
-              { title: 'Medya Kütüphanesi', path: '/admin/medya', icon: <ImageIcon size={20} />, desc: 'Görselleri organize et' },
               { title: 'Yorumlar', path: '/admin/yorumlar', icon: <MessageSquare size={20} />, desc: 'Geri bildirimleri incele' },
               { title: 'Sık Sorulan Sorular', path: '/admin/sss', icon: <FileText size={20} />, desc: 'SSS ekle ve düzenle' }
             ].map((link, idx) => (

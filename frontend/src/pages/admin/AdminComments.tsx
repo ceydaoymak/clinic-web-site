@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../../config/api';
-import { 
-  MessageSquare, 
-  Star, 
-  Trash2, 
-  CheckCircle2, 
-  XCircle, 
-  Plus, 
-  LayoutDashboard, 
-  ArrowLeft, 
-  Loader2, 
+import {
+  MessageSquare,
+  Star,
+  Trash2,
+  CheckCircle2,
+  XCircle,
+  Plus,
+  LayoutDashboard,
+  ArrowLeft,
+  Loader2,
   Send
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -28,6 +28,10 @@ const AdminComments: React.FC = () => {
   const [newComment, setNewComment] = useState({ initials: '', rating: 5, content: '' });
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [filter, setFilter] = useState<'all' | 'pending'>('all');
+
+  const pendingCount = comments.filter(c => !c.isActive).length;
+  const filteredComments = comments.filter(c => filter === 'all' ? true : !c.isActive);
 
   const fetchComments = async () => {
     try {
@@ -48,7 +52,7 @@ const AdminComments: React.FC = () => {
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();
     if (newComment.initials.length > 2) return alert('Baş harfler en fazla 2 karakter olmalı');
-    
+
     try {
       setSubmitting(true);
       await api.post('/comments', newComment);
@@ -97,7 +101,7 @@ const AdminComments: React.FC = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Sol Kolon: Yeni Yorum Ekleme */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sticky top-24">
@@ -105,7 +109,7 @@ const AdminComments: React.FC = () => {
                 <Plus size={18} className="text-indigo-500" />
                 Yorum Ekle
               </h3>
-              
+
               <form onSubmit={handleAdd} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-400 uppercase mb-2 ml-1">Kullanıcı (Baş Harfler)</label>
@@ -161,14 +165,28 @@ const AdminComments: React.FC = () => {
 
           {/* Sağ Kolon: Yorum Listesi */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center justify-between mb-2 px-2">
-              <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-                <MessageSquare size={20} className="text-indigo-600" />
-                Müşteri Geri Bildirimleri
-              </h2>
-              <span className="text-xs font-bold text-slate-400 uppercase bg-slate-100 px-2 py-1 rounded">
-                Toplam {comments.length}
-              </span>
+            <div className="flex items-center justify-between mb-4 px-2">
+              <div className="flex items-center gap-4">
+                <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                  <MessageSquare size={20} className="text-indigo-600" />
+                  Müşteri Geri Bildirimleri
+                </h2>
+                <div className="flex bg-slate-100 p-1 rounded-lg">
+                  <button
+                    onClick={() => setFilter('all')}
+                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${filter === 'all' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                  >
+                    Tümü ({comments.length})
+                  </button>
+                  <button
+                    onClick={() => setFilter('pending')}
+                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all flex items-center gap-2 ${filter === 'pending' ? 'bg-white text-amber-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                  >
+                    Onay Bekleyen
+                    {pendingCount > 0 && <span className="w-5 h-5 flex items-center justify-center bg-amber-100 text-amber-600 rounded-full text-[10px]">{pendingCount}</span>}
+                  </button>
+                </div>
+              </div>
             </div>
 
             {loading ? (
@@ -176,31 +194,32 @@ const AdminComments: React.FC = () => {
                 <Loader2 className="animate-spin w-8 h-8 text-indigo-600 mx-auto mb-4" />
                 <p className="text-slate-500">Yorumlar yükleniyor...</p>
               </div>
-            ) : comments.length === 0 ? (
+            ) : filteredComments.length === 0 ? (
               <div className="py-20 text-center bg-white rounded-2xl border border-slate-200 border-dashed">
-                <p className="text-slate-400 italic">Henüz yorum eklenmemiş.</p>
+                <p className="text-slate-400 italic">
+                  {filter === 'pending' ? 'Onay bekleyen yorum bulunmuyor.' : 'Henüz yorum eklenmemiş.'}
+                </p>
               </div>
             ) : (
               <div className="grid gap-4">
-                {comments.map(comment => (
-                  <div 
-                    key={comment.id} 
-                    className={`bg-white rounded-2xl border transition-all p-5 flex flex-col gap-4 ${
-                      comment.isActive ? 'border-slate-200 shadow-sm' : 'border-slate-100 opacity-75'
-                    }`}
+                {filteredComments.map(comment => (
+                  <div
+                    key={comment.id}
+                    className={`bg-white rounded-2xl border transition-all p-5 flex flex-col gap-4 ${!comment.isActive ? 'border-amber-200 bg-amber-50/30 ring-1 ring-amber-100' : 'border-slate-200 shadow-sm'
+                      }`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg shadow-sm">
+                        <div className={`w-12 h-12 rounded-full border flex items-center justify-center font-bold text-lg shadow-sm ${!comment.isActive ? 'bg-amber-100 text-amber-600 border-amber-200' : 'bg-indigo-50 text-indigo-600 border-indigo-100'}`}>
                           {comment.initials}
                         </div>
                         <div>
                           <div className="flex items-center gap-1">
                             {[...Array(5)].map((_, i) => (
-                              <Star 
-                                key={i} 
-                                size={14} 
-                                className={i < comment.rating ? "text-amber-400 fill-amber-400" : "text-slate-200"} 
+                              <Star
+                                key={i}
+                                size={14}
+                                className={i < comment.rating ? "text-amber-400 fill-amber-400" : "text-slate-200"}
                               />
                             ))}
                           </div>
@@ -209,32 +228,32 @@ const AdminComments: React.FC = () => {
                           </span>
                         </div>
                       </div>
-                      
-                      <div className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-widest ${
-                        comment.isActive ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-slate-100 text-slate-500 border border-slate-200'
-                      }`}>
-                        {comment.isActive ? 'AKTİF' : 'PASİF'}
+
+                      <div className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-widest flex items-center gap-1 ${comment.isActive ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-amber-100 text-amber-700 border border-amber-200'
+                        }`}>
+                        {comment.isActive ? 'YAYINDA' : 'ONAY BEKLİYOR'}
                       </div>
                     </div>
 
-                    <p className="text-slate-600 text-sm leading-relaxed italic">
+                    <p className={`text-sm leading-relaxed italic ${!comment.isActive ? 'text-slate-700 font-medium' : 'text-slate-600'}`}>
                       "{comment.content}"
                     </p>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-slate-50">
-                      <button 
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-50/50">
+                      <button
                         onClick={() => handleUpdate(comment.id, { isActive: !comment.isActive })}
-                        className={`flex items-center gap-2 text-xs font-bold transition-colors ${
-                          comment.isActive ? 'text-slate-400 hover:text-amber-600' : 'text-indigo-600 hover:text-indigo-700'
-                        }`}
+                        className={`flex items-center gap-2 text-xs font-bold transition-all px-4 py-2 rounded-lg ${comment.isActive
+                            ? 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
+                            : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm shadow-indigo-200'
+                          }`}
                       >
                         {comment.isActive ? <XCircle size={16} /> : <CheckCircle2 size={16} />}
-                        {comment.isActive ? 'Yayından Kaldır' : 'Yayınla'}
+                        {comment.isActive ? 'Yayından Kaldır' : 'Onayla ve Yayınla'}
                       </button>
-                      
-                      <button 
+
+                      <button
                         onClick={() => handleDelete(comment.id)}
-                        className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-red-600 transition-colors"
+                        className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-red-600 transition-colors p-2 hover:bg-red-50 rounded-lg"
                       >
                         <Trash2 size={16} />
                         Sil

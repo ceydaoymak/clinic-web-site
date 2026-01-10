@@ -41,11 +41,11 @@ const Blog = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      
+
       {/* --- HEADER SECTION --- */}
-      <section className="pt-32 pb-16 bg-stone-50 border-b border-stone-100">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-stone-50 border-b border-stone-100">
         <div className="container-custom">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="max-w-3xl"
@@ -54,7 +54,7 @@ const Blog = () => {
               <BookOpen className="w-4 h-4" />
               <span>Sağlık Rehberi</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-light tracking-tight text-slate-900 mb-6">
+            <h1 className="text-4xl md:text-7xl font-light tracking-tight text-slate-900 mb-4 md:mb-6">
               Blog Yazıları
             </h1>
             <p className="text-xl text-slate-500 leading-relaxed">
@@ -68,7 +68,7 @@ const Blog = () => {
         <div className="container-custom max-w-5xl">
           {loading ? (
             <div className="flex flex-col items-center py-20">
-              <motion.div 
+              <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
                 className="w-10 h-10 border-4 border-slate-200 border-t-indigo-600 rounded-full"
@@ -82,13 +82,13 @@ const Blog = () => {
           ) : (
             <div className="space-y-24">
               {posts.map((post) => (
-                <motion.article 
-                  key={post.id} 
+                <motion.article
+                  key={post.id}
                   {...fadeInUp}
                   className="group"
                 >
                   <Link to={`/blog/${post.slug}`} className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
-                    
+
                     {/* Görsel Alanı - Desktop'ta 5/12 genişlik */}
                     <div className="md:col-span-5 relative overflow-hidden rounded-2xl bg-stone-100 aspect-[4/3] md:aspect-square">
                       {post.coverImage ? (
@@ -104,7 +104,7 @@ const Blog = () => {
                       )}
                       {/* Tarih Etiketi */}
                       <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm text-[10px] font-bold uppercase tracking-widest text-slate-900 rounded">
-                         {post.publishedAt && format(new Date(post.publishedAt), 'dd MMM yyyy', { locale: tr })}
+                        {post.publishedAt && format(new Date(post.publishedAt), 'dd MMM yyyy', { locale: tr })}
                       </div>
                     </div>
 
@@ -113,17 +113,17 @@ const Blog = () => {
                       <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-5 group-hover:text-indigo-600 transition-colors duration-300 leading-tight">
                         {post.title}
                       </h2>
-                      
+
                       <div className="text-slate-500 text-lg leading-relaxed mb-6 line-clamp-3 md:line-clamp-4">
                         {post.excerpt ? (
-                            <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                          <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
                         ) : (
-                            <div dangerouslySetInnerHTML={{ __html: post.content?.substring(0, 200) + '...' }} />
+                          <div dangerouslySetInnerHTML={{ __html: post.content?.substring(0, 200) + '...' }} />
                         )}
                       </div>
 
                       <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-slate-900 group-hover:gap-4 transition-all duration-300">
-                        Makaleyi Oku 
+                        Makaleyi Oku
                         <ChevronRight className="w-5 h-5 text-indigo-600" />
                       </div>
                     </div>
@@ -146,7 +146,7 @@ const Blog = () => {
                 <ArrowLeft className="w-4 h-4" />
                 Önceki
               </button>
-              
+
               <div className="text-slate-400 font-medium text-sm">
                 Sayfa <span className="text-slate-900">{currentPage}</span> / {totalPages}
               </div>

@@ -7,7 +7,7 @@ interface FAQ {
   id: string;
   question: string;
   answer: string;
-  category?: string; 
+  category?: string;
 }
 
 const FAQPage: React.FC = () => {
@@ -37,8 +37,8 @@ const FAQPage: React.FC = () => {
 
   return (
     <div className="bg-stone-50 min-h-screen">
-      
-      <section className="pt-32 pb-16 bg-white border-b border-stone-100">
+
+      <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-white border-b border-stone-100">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -70,31 +70,28 @@ const FAQPage: React.FC = () => {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.1 }}
-                  className={`bg-white rounded-2xl border transition-all duration-300 ${
-                    openIndex === idx 
-                      ? 'border-indigo-200 shadow-xl shadow-indigo-500/5' 
+                  className={`bg-white rounded-2xl border transition-all duration-300 ${openIndex === idx
+                      ? 'border-indigo-200 shadow-xl shadow-indigo-500/5'
                       : 'border-slate-200 hover:border-indigo-200 shadow-sm'
-                  }`}
+                    }`}
                 >
                   <button
                     className="w-full text-left px-6 py-5 md:px-8 md:py-6 focus:outline-none flex justify-between items-center group"
                     onClick={() => toggleAccordion(idx)}
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                        openIndex === idx ? 'bg-indigo-600 text-white' : 'bg-indigo-50 text-indigo-500'
-                      }`}>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${openIndex === idx ? 'bg-indigo-600 text-white' : 'bg-indigo-50 text-indigo-500'
+                        }`}>
                         <HelpCircle size={18} />
                       </div>
-                      <span className={`font-bold md:text-lg transition-colors ${
-                        openIndex === idx ? 'text-indigo-600' : 'text-slate-700'
-                      }`}>
+                      <span className={`font-bold md:text-lg transition-colors ${openIndex === idx ? 'text-indigo-600' : 'text-slate-700'
+                        }`}>
                         {faq.question}
                       </span>
                     </div>
-                    <ChevronDown 
-                      className={`transition-transform duration-300 ${openIndex === idx ? 'rotate-180 text-indigo-600' : 'text-slate-400'}`} 
-                      size={20} 
+                    <ChevronDown
+                      className={`transition-transform duration-300 ${openIndex === idx ? 'rotate-180 text-indigo-600' : 'text-slate-400'}`}
+                      size={20}
                     />
                   </button>
 

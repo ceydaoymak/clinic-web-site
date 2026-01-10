@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../../config/api';
-import { 
-  Loader2, 
-  ArrowLeft, 
-  Briefcase, 
-  Type, 
-  AlignLeft, 
-  CheckCircle2, 
+import {
+  Loader2,
+  ArrowLeft,
+  Briefcase,
+  Type,
+  AlignLeft,
+  CheckCircle2,
   AlertCircle,
   LayoutDashboard
 } from 'lucide-react';
@@ -25,7 +25,11 @@ const AdminServiceNew = () => {
     setError('');
     setLoading(true);
     try {
-      await api.post('/services', { title, description, content });
+      await api.post('/services', {
+        title,
+        description: description || "",
+        content: content || ""
+      });
       // Önceki sayfada '/admin/service' kullanılmış olabilir, 
       // projenizdeki path'e göre burayı '/admin/services' olarak güncelledim.
       navigate('/admin/services');
@@ -115,7 +119,6 @@ const AdminServiceNew = () => {
                 placeholder="Hizmetinizin kısa açıklamasını girin..."
                 value={description}
                 onChange={e => setDescription(e.target.value)}
-                required
               />
             </div>
 
@@ -130,7 +133,6 @@ const AdminServiceNew = () => {
                 placeholder="Hizmetinizin detaylı içeriğini girin..."
                 value={content}
                 onChange={e => setContent(e.target.value)}
-                required
               />
             </div>
 

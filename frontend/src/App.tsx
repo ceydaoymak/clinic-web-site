@@ -6,7 +6,6 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import ServiceDetail from './pages/ServiceDetail';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
@@ -25,7 +24,6 @@ function App() {
         <Route index element={<Home />} />
         <Route path="hakkinda" element={<About />} />
         <Route path="hizmetler" element={<Services />} />
-        <Route path="hizmetler/:slug" element={<ServiceDetail />} />
         <Route path="blog" element={<Blog />} />
         <Route path="blog/:slug" element={<BlogDetail />} />
         <Route path="iletisim" element={<Contact />} />
