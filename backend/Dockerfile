@@ -2,23 +2,26 @@ FROM node:18-bullseye
 
 WORKDIR /app
 
-# package.json ve lock dosyasını kopyala
+# package.json ve lock
 COPY package*.json ./
 
-# Build sırasında tsc lazım olduğu için devDependencies DA kurulur
+# Prod + Dev deps (tsc ve prisma için gerekli)
 RUN npm ci
 
-# Proje dosyalarını kopyala
+# Proje dosyaları
 COPY . .
 
+# Prisma client
 RUN npx prisma generate
 
 # TypeScript build
 RUN npm run build
 
-# Production ayarları
+# Production env
 ENV NODE_ENV=production
-EXPOSE 4000
 
-# App'i başlat
+# Render 10000 port ister
+EXPOSE 10000
+
+# Start: migrate + server
 CMD ["npm", "start"]
