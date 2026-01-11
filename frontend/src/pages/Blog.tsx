@@ -18,7 +18,7 @@ const Blog = () => {
       try {
         setLoading(true);
         const response = await api.get(
-          `/api/blog?page=${currentPage}&limit=6&published=true`
+          `/blog?page=${currentPage}&limit=6&published=true`
         );
         setPosts(response.data.posts);
         setTotalPages(response.data.pages);
