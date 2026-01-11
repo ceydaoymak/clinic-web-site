@@ -32,7 +32,7 @@ const AdminServiceNew = () => {
       });
       // Önceki sayfada '/admin/service' kullanılmış olabilir, 
       // projenizdeki path'e göre burayı '/admin/services' olarak güncelledim.
-      navigate('/admin/services');
+      navigate('/admin/hizmetler');
     } catch (err: any) {
       setError(err.response?.data?.error || 'Hizmet kaydedilirken bir hata oluştu.');
     } finally {
@@ -147,7 +147,7 @@ const AdminServiceNew = () => {
             <div className="flex items-center gap-4 pt-4">
               <button
                 type="button"
-                onClick={() => navigate('/admin/services')}
+                onClick={() => navigate('/admin/hizmetler')}
                 className="flex-1 py-3 px-4 border border-slate-200 text-slate-600 font-semibold rounded-xl hover:bg-slate-50 transition-colors"
               >
                 Vazgeç

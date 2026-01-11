@@ -1,4 +1,5 @@
 import AdminAyarlar from './pages/admin/AdminSettings';
+import AdminMessages from './pages/admin/AdminMessages';
 import AdminServiceNew from './pages/admin/AdminServiceNew';
 import AdminServices from './pages/admin/AdminServices';
 import AdminMedia from './pages/admin/AdminMedia';
@@ -108,6 +109,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminAyarlar />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/mesajlar"
+          element={
+            <ProtectedRoute>
+              <AdminMessages />
             </ProtectedRoute>
           }
         />

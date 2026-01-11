@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { api } from '../config/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Phone, Clock, Send, CheckCircle } from 'lucide-react';
 
@@ -11,14 +12,18 @@ const Contact = () => {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form gönderildi:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 4000);
+    try {
+      await api.post('/contact', formData);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      }, 4000);
+    } catch (err) {
+      alert('Mesaj gönderilemedi!');
+    }
   };
 
   const handleChange = (

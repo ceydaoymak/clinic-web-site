@@ -7,6 +7,7 @@ import blogRoutes from "./routes/blog.routes";
 import mediaRoutes from "./routes/media.routes";
 import serviceRoutes from "./routes/service.routes";
 import settingsRoutes from "./routes/settings.routes";
+import contactRoutes from "./routes/contact.routes";
 import commentRoutes from "./routes/comment.routes";
 import faqRoutes from "./routes/faq.routes";
 
@@ -44,6 +45,7 @@ app.use("/api/blog", blogRoutes);
 app.use("/api/media", mediaRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/settings", settingsRoutes);
+app.use("/api/contact", contactRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/faqs", faqRoutes);
 

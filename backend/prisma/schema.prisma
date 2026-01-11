@@ -1,12 +1,5 @@
-model Settings {
-  id        String   @id @default(cuid())
-  profilePhotoUrl String?
-  heroPhotoUrl    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
-  @@map("settings")
-}
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -16,7 +9,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+}
+model Settings {
+  id        String   @id @default(cuid())
+  profilePhotoUrl String?
+  heroPhotoUrl    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
+  @@map("settings")
+}
 model User {
   id        String     @id @default(cuid())
   email     String     @unique
