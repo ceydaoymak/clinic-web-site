@@ -204,12 +204,12 @@ const Home = () => {
                 <h2 className="text-3xl md:text-5xl font-light mb-4">Hasta <span className="font-bold text-indigo-400">Deneyimleri</span></h2>
                 <p className="text-slate-400 max-w-md mx-auto">Ailelerimizin paylaştığı gerçek görüşler.</p>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {comments.slice(0, 3).map((comment) => (
+              <div className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0 scrollbar-hide">
+                {comments.map((comment) => (
                   <motion.div
                     key={comment.id}
                     variants={fadeInUp}
-                    className="bg-slate-800/40 p-8 rounded-3xl border border-slate-700/50 backdrop-blur-sm relative flex flex-col justify-between"
+                    className="bg-slate-800/40 p-8 rounded-3xl border border-slate-700/50 backdrop-blur-sm relative flex flex-col justify-between min-w-[300px] md:min-w-[400px] snap-center"
                   >
                     <Quote className="absolute top-8 right-8 w-12 h-12 text-indigo-500 opacity-20" />
                     <p className="text-slate-300 italic leading-relaxed mb-8 relative z-10">"{comment.content}"</p>

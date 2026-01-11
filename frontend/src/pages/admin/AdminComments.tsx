@@ -36,7 +36,7 @@ const AdminComments: React.FC = () => {
   const fetchComments = async () => {
     try {
       setLoading(true);
-      const res = await api.get('/comments');
+      const res = await api.get('/comments?admin=true');
       setComments(res.data);
     } catch (error) {
       console.error('Yorumlar yüklenemedi');
@@ -55,7 +55,7 @@ const AdminComments: React.FC = () => {
 
     try {
       setSubmitting(true);
-      await api.post('/comments', newComment);
+      await api.post('/comments/admin', newComment);
       setNewComment({ initials: '', rating: 5, content: '' });
       fetchComments();
     } catch (error) {
@@ -243,8 +243,8 @@ const AdminComments: React.FC = () => {
                       <button
                         onClick={() => handleUpdate(comment.id, { isActive: !comment.isActive })}
                         className={`flex items-center gap-2 text-xs font-bold transition-all px-4 py-2 rounded-lg ${comment.isActive
-                            ? 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
-                            : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm shadow-indigo-200'
+                          ? 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
+                          : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm shadow-indigo-200'
                           }`}
                       >
                         {comment.isActive ? <XCircle size={16} /> : <CheckCircle2 size={16} />}
