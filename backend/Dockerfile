@@ -11,6 +11,8 @@ RUN npm ci
 # Proje dosyalarını kopyala
 COPY . .
 
+RUN npx prisma generate
+
 # TypeScript build
 RUN npm run build
 
