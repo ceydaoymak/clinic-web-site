@@ -14,6 +14,8 @@ COPY . .
 # Prisma client
 RUN npx prisma generate
 
+RUN npx prisma migrate deploy
+
 # TypeScript build
 RUN npm run build
 
