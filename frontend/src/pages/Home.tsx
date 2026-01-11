@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import { ChevronRight, Award, Users, Stethoscope, Quote, Calendar } from 'lucide-react';
-import api, { getBackendUrl } from '../config/api';
+import api from '../config/api';
 import { BlogPost, Comment } from '../types';
 
 const Home = () => {
-  const [latestPosts, setLatestPosts] = useState<BlogPost[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
+  const [latestPosts, setLatestPosts] = useState<BlogPost[]>([]);
 
   // Yorum Formu State
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
@@ -353,7 +353,7 @@ const Home = () => {
                       <div className="aspect-[16/10] overflow-hidden rounded-2xl mb-6 bg-stone-100 shadow-md">
                         {post.coverImage && (
                           <img
-                            src={getBackendUrl(post.coverImage)}
+                            src={post.coverImage || undefined}
                             alt={post.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           />

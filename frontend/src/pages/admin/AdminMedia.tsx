@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import api, { getBackendUrl } from '../../config/api';
+import api from '../../config/api';
 import { Media } from '../../types';
 import { Link } from 'react-router-dom';
 import { 
@@ -217,10 +217,10 @@ const AdminMedia = () => {
                                 <div className="w-12 h-12 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center flex-shrink-0">
                                   {isImage ? (
                                     <img 
-                                      src={getBackendUrl(m.url)} 
-                                      alt={m.originalName} 
-                                      className="w-full h-full object-cover"
-                                    />
+                                        src={m.url ? `${import.meta.env.VITE_API_URL}${m.url.startsWith('/') ? m.url : '/' + m.url}` : undefined} 
+                                        alt={m.originalName} 
+                                        className="w-full h-full object-cover"
+                                      />
                                   ) : (
                                     <File size={20} className="text-slate-400" />
                                   )}
@@ -241,7 +241,7 @@ const AdminMedia = () => {
                             <td className="px-6 py-4">
                               <div className="flex items-center justify-end gap-2">
                                 <a
-                                  href={getBackendUrl(m.url)}
+                                  href={m.url ? `${import.meta.env.VITE_API_URL}${m.url.startsWith('/') ? m.url : '/' + m.url}` : undefined}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"

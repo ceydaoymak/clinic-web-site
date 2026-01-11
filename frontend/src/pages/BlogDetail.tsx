@@ -1,4 +1,3 @@
-import { getBackendUrl } from '../config/api';
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../config/api';
@@ -83,7 +82,7 @@ const BlogDetail = () => {
           {post.coverImage && (
             <div className="mb-8 rounded-lg overflow-hidden">
               <img
-                src={getBackendUrl(post.coverImage)}
+                src={post.coverImage || undefined}
                 alt={post.title}
                 className="w-full h-auto"
               />

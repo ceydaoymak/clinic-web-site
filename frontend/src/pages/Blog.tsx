@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import { ChevronRight, ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
-import api, { getBackendUrl } from '../config/api';
+import api from '../config/api';
 import { BlogPost } from '../types';
 
 const Blog = () => {
@@ -93,10 +93,11 @@ const Blog = () => {
                     <div className="md:col-span-5 relative overflow-hidden rounded-2xl bg-stone-100 aspect-[4/3] md:aspect-square">
                       {post.coverImage ? (
                         <img
-                          src={getBackendUrl(post.coverImage)}
+                          src={post.coverImage || undefined}
                           alt={post.title}
                           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 grayscale-[20%] group-hover:grayscale-0"
                         />
+
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <BookOpen className="w-12 h-12 text-stone-200" />

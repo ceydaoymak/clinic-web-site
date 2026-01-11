@@ -173,7 +173,6 @@ const AdminDashboard = () => {
               { title: 'Hizmetler', path: '/admin/hizmetler', icon: <Settings size={20} />, desc: 'Verilen hizmetleri yönet' },
               { title: 'Yorumlar', path: '/admin/yorumlar', icon: <MessageSquare size={20} />, desc: 'Geri bildirimleri incele' },
               { title: 'Sık Sorulan Sorular', path: '/admin/sss', icon: <FileText size={20} />, desc: 'SSS ekle ve düzenle' },
-              { title: 'Ayarlar', path: '/admin/ayarlar', icon: <Settings size={20} />, desc: 'Profil ve hero fotoğrafı' }
             ].map((link, idx) => (
               <Link
                 key={idx}

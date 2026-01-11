@@ -1,4 +1,3 @@
-import { getBackendUrl } from '../../config/api';
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import ReactQuill from 'react-quill';
@@ -240,10 +239,11 @@ const AdminBlogEdit = () => {
                 {coverImage ? (
                   <div className="relative rounded-xl overflow-hidden border border-slate-200">
                     <img
-                      src={getBackendUrl(coverImage)}
+                      src={coverImage || undefined}
                       alt="Cover"
                       className="w-full h-48 object-cover transition-transform group-hover:scale-105"
                     />
+
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                       <button
                         onClick={() => fileInputRef.current?.click()}
