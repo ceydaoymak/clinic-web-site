@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { api } from '../config/api';
+import api from '../config/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Phone, Clock, Send, CheckCircle } from 'lucide-react';
 
