@@ -2,12 +2,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import api from '../../config/api';
 import { BlogPost, User } from '../../types';
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Settings, 
-  MessageSquare, 
-  LogOut, 
+import {
+  LayoutDashboard,
+  FileText,
+  Settings,
+  MessageSquare,
+  LogOut,
   PlusCircle,
   ChevronRight,
 } from 'lucide-react';
@@ -31,7 +31,7 @@ const AdminDashboard = () => {
         setLoading(true);
         const response = await api.get('/blog?page=1&limit=10');
         const posts: BlogPost[] = response.data.posts || [];
-        
+
         setStats({
           totalPosts: posts.length,
           publishedPosts: posts.filter((p: BlogPost) => p.published).length,
@@ -56,8 +56,8 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
+    <div style={{
+      minHeight: '100vh',
       backgroundColor: '#f8fafc', // Daha yumuşak bir gri arka plan
       fontFamily: '"Inter", system-ui, sans-serif',
       color: '#1e293b'
@@ -86,7 +86,7 @@ const AdminDashboard = () => {
               Yönetim Paneli
             </h1>
           </div>
-          
+
           {user && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <div style={{ textAlign: 'right', display: 'none', md: 'block' } as any}>
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
       </header>
 
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '2.5rem 2rem' }}>
-        
+
         {/* Karşılama Alanı */}
         <div style={{ marginBottom: '2.5rem' }}>
           <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.5rem' }}>
@@ -197,10 +197,10 @@ const AdminDashboard = () => {
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                <div style={{ 
-                  backgroundColor: '#f1f5f9', 
-                  padding: '0.75rem', 
-                  borderRadius: '10px', 
+                <div style={{
+                  backgroundColor: '#f1f5f9',
+                  padding: '0.75rem',
+                  borderRadius: '10px',
                   marginRight: '1rem',
                   color: '#4f46e5'
                 }}>

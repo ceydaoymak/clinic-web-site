@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../config/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
@@ -16,7 +16,7 @@ const FAQPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/faqs')
+    api.get('/faqs')
       .then(res => {
         setFaqs(res.data);
         setLoading(false);
@@ -71,8 +71,8 @@ const FAQPage: React.FC = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   className={`bg-white rounded-2xl border transition-all duration-300 ${openIndex === idx
-                      ? 'border-indigo-200 shadow-xl shadow-indigo-500/5'
-                      : 'border-slate-200 hover:border-indigo-200 shadow-sm'
+                    ? 'border-indigo-200 shadow-xl shadow-indigo-500/5'
+                    : 'border-slate-200 hover:border-indigo-200 shadow-sm'
                     }`}
                 >
                   <button

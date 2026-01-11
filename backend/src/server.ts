@@ -15,7 +15,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: [config.frontendUrl, 'http://localhost:3000'], // allow frontend from env or default
+  origin: [config.frontendUrl], // allow frontend from env
   credentials: true // if you use cookies or authentication
 }));
 

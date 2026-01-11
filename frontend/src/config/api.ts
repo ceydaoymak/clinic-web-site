@@ -1,5 +1,5 @@
+
 // Ortak backend dosya/görsel URL fonksiyonu
-// SADECE Vite proxy üzerinden çalışır
 export function getBackendUrl(path: string) {
   // Eğer tam URL ise dokunma (CDN vs.)
   if (/^https?:\/\//.test(path)) return path;
@@ -9,17 +9,24 @@ export function getBackendUrl(path: string) {
     path = `/${path}`;
   }
 
-  // Backend'e proxy üzerinden git
-  // Örn: /uploads/abc.jpg -> /api/uploads/abc.jpg
-  return `/api${path}`;
+  // Use configured API URL
+  const baseUrl = import.meta.env.VITE_API_URL;
+
+  // Clean up double slashes if any
+  return `${baseUrl}${path}`;
 }
 
-
 import axios from 'axios';
-const API_BASE_URL = '/api';
+
+// Strict usage of VITE_API_URL
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+if (!API_BASE_URL) {
+  console.error('VITE_API_URL is not defined in .env!');
+}
 
 export const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: `${API_BASE_URL}/api`,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -44,10 +51,10 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
 export const publicApi = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE_URL,
 });
 
 
 export default api;
-
