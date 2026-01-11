@@ -6,7 +6,6 @@ import {
   LayoutDashboard, 
   FileText, 
   Settings, 
-  Image as ImageIcon, 
   MessageSquare, 
   LogOut, 
   PlusCircle,

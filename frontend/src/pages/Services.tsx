@@ -1,5 +1,4 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Stethoscope, Activity, Search, ChevronRight } from 'lucide-react';
 import api from '../config/api';
