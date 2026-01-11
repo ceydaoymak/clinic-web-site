@@ -1,3 +1,12 @@
+import AdminAyarlar from './pages/admin/AdminSettings';
+        <Route
+          path="/admin/ayarlar"
+          element={
+            <ProtectedRoute>
+              <AdminAyarlar />
+            </ProtectedRoute>
+          }
+        />
 import AdminServiceNew from './pages/admin/AdminServiceNew';
 import AdminServices from './pages/admin/AdminServices';
 import AdminMedia from './pages/admin/AdminMedia';

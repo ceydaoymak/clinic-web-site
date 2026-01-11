@@ -1,12 +1,20 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import api from '../config/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, Mail, MapPin, Instagram, Facebook, ChevronRight } from 'lucide-react';
 
 const Layout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [profilePhoto, setProfilePhoto] = useState<string | null>(null);
   const location = useLocation();
+
+  useEffect(() => {
+    api.get('/settings').then(res => {
+      setProfilePhoto(res.data.profilePhotoUrl || '/img/foto.jpeg');
+    });
+  }, []);
 
   // Sayfa kaydırıldığında navbar arka planını değiştir
   useEffect(() => {
@@ -48,7 +56,7 @@ const Layout = () => {
             <Link to="/" className="flex items-center gap-3 group">
               <div className="relative">
                 <img
-                  src="/img/foto.jpeg"
+                  src={profilePhoto || '/img/foto.jpeg'}
                   alt="Op. Dr. Bülent Azman"
                   className="h-12 w-12 rounded-full object-cover border-2 border-indigo-600 group-hover:scale-105 transition-transform"
                 />
@@ -136,7 +144,7 @@ const Layout = () => {
             {/* Brand Section */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                <img src="/img/foto.jpeg" alt="Logo" className="h-10 w-10 rounded-full grayscale-[50%]" />
+                <img src={profilePhoto || '/img/foto.jpeg'} alt="Logo" className="h-10 w-10 rounded-full grayscale-[50%]" />
                 <span className="text-white font-bold text-xl">Dr. Bülent Azman</span>
               </div>
               <p className="text-slate-400 leading-relaxed mb-6">
