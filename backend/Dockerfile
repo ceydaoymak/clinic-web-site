@@ -14,8 +14,6 @@ COPY . .
 # Prisma client
 RUN npx prisma generate
 
-RUN npx prisma migrate deploy
-
 # TypeScript build
 RUN npm run build
 
@@ -26,4 +24,6 @@ ENV NODE_ENV=production
 EXPOSE 10000
 
 # Start: migrate + server
-CMD ["npm", "start"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
